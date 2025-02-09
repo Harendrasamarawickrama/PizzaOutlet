@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Login.css"; // Assuming you're using an external CSS file
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("");
@@ -6,32 +7,48 @@ const Login = ({ onLogin }) => {
   const [error, setError] = useState("");
 
   const handleLogin = () => {
-    if (username === "owner" && password === "123") {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    // email validation
+    if (!emailRegex.test(username)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (username === "owner@gmail.com" && password === "o123") {
       onLogin("owner");
-    } else if (username === "customer" && password === "456") {
+      alert("Login successfully");
+    } else if (username === "customer@gamail.com" && password === "c456") {
       onLogin("customer");
+      alert("Login successfully");
     } else {
       setError("Invalid credentials");
     }
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
+      <label>Email</label>
       <input
-        type="text"
-        placeholder="Username"
+        type="email"
+        placeholder="Email Address"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        className="input-field"
       />
+      <label>Password</label>
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        className="input-field"
       />
-      <button onClick={handleLogin}>Login</button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <button onClick={handleLogin} className="login-btn">
+        Login
+      </button>
+      {error && <p className="error-text">{error}</p>}
     </div>
   );
 };
