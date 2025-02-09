@@ -18,7 +18,7 @@ const Login = ({ onLogin }) => {
     if (username === "owner@gmail.com" && password === "o123") {
       onLogin("owner");
       alert("Login successfully");
-    } else if (username === "customer@gamail.com" && password === "c456") {
+    } else if (username === "customer@gmail.com" && password === "c456") {
       onLogin("customer");
       alert("Login successfully");
     } else {
